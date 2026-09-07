@@ -12,31 +12,28 @@ data_in = data_in[(m <= 5) | (m >= 11)]
 
 data_gam = data_in.dropna()                  
 y = data_gam["Rho"].to_numpy()
-X = data_gam.to_numpy()                    
+X = data_gam.drop(columns = "Rho").to_numpy()                    
 gam_out = LinearGAM(s(0), n_splines = 15).fit(X, y)
 gam_out.summary()
 
-drop_param = [col for col in data_in.columns if col not in ["TMIN", "TMAX", "WS", "G", "WS_HN", "DTR"]]
-data_sub = data_in.drop(columns = drop_param)
+data_sub = data_in.drop(columns = ["TMIN", "TMAX", "WS", "G", "WS_HN", "DTR"])
 data_gam = data_sub.dropna()
 y = data_gam["Rho"].to_numpy()
-X = data_gam.to_numpy()                      
+X = data_gam.drop(columns = "Rho").to_numpy()                     
 gam_out = LinearGAM(s(0), n_splines = 15).fit(X, y)
 gam_out.summary()
 
-drop_param = [col for col in data_sub.columns if col not in ["P", "RH", "RH_HN", "TD", "T_HN"]]
-data_sub = data_in.drop(columns = drop_param)
+data_sub = data_in.drop(columns = ["P", "RH", "RH_HN", "TD", "T_HN"])
 data_gam = data_sub.dropna()
 y = data_gam["Rho"].to_numpy()
-X = data_gam.to_numpy()                      
+X = X = data_gam.drop(columns = "Rho").to_numpy()                       
 gam_out = LinearGAM(s(0), n_splines = 15).fit(X, y)
 gam_out.summary()
 
-drop_param = [col for col in data_sub.columns if col not in ["HS", "HN", "PDD", "FT", "HS_Loss", "ROS_P"]]
-data_sub = data_in.drop(columns = drop_param)
+data_sub = data_in.drop(columns = ["HS", "HN", "PDD", "FT", "HS_Loss", "ROS_P"])
 data_gam = data_sub.dropna()
 y = data_gam["Rho"].to_numpy()
-X = data_gam.to_numpy()                      
+X = data_gam.drop(columns = "Rho").to_numpy()                     
 gam_out = LinearGAM(s(0), n_splines = 15).fit(X, y)
 gam_out.summary()
 
